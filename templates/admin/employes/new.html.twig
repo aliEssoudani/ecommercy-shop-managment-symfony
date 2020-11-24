@@ -1,0 +1,36 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block body %}
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white"> Add employee</h1>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {{ form_start(form) }}
+            {{ form_widget(form.cin,  {'attr': {'class' : "form-control", 'placeholder': 'Enter CIN'}}) }}
+            {{ form_widget(form.salary,  {'attr': {'class' : "form-control", 'placeholder': 'Enter Salary'}}) }}
+            {{ form_widget(form.adress,  {'attr': {'class' : "form-control", 'placeholder': 'EnterAdress'}}) }}
+            {{ form_widget(form.zone,  {'attr': {'class' : "form-control", 'placeholder': 'Enter zone'}}) }}
+            {{ form_widget(form.isActive,  {'attr': {'class' : "form-control", 'placeholder': 'isActive'}}) }}
+            {{ form_widget(form.fullName, {'attr': {'class' : "form-control", 'placeholder': 'full name'}}) }}
+            <select class="custom-select" id="inputGroupSelect01" name="stores" >
+
+                <option selected >Choose Store</option>
+                {% for s in stores %}
+                    <option value={{ s.id }} >{{ s.name }}</option>
+                {% endfor%}
+            </select>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block"> Create</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

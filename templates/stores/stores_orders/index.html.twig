@@ -1,0 +1,180 @@
+{% extends 'baseStore.html.twig' %}
+
+{% block body %}
+
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white">Store Orders</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+    <!-- Table -->
+    <div>
+    <div class="row">
+    <div class="col">
+    <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row">
+
+                <div class="col-md-3">
+
+                     <form method="POST" action="">
+                        <select class="custom-select" id="inputGroupSelect01" name="category">
+
+                            <option selected>Choose Category</option>
+                            {% for c in categories %}
+
+                               <option type="button"  value={{ c.id }}>  {{ c.Title }} </option>
+
+                            {% endfor %}
+                        </select>
+                         <div class="text-center">
+                             <button type="submit" class="btn btn-primary my-4">Confirm</button>
+                         </div>
+
+                     </form>
+
+                </div>
+
+                <div class="col-md-3">
+                    <input type="text" class="form-control " placeholder="Search Table" id="contact-filter">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive" id="categoriesTable">
+            <table class="table align-items-center table-flush tablesorter tablepager">
+
+                <thead class="thead-light">
+
+                <tr>
+                    <th  scope="col">product Name</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Add to Cart</th>
+                </tr>
+                </thead>
+                {% if products %}
+                <tbody id="categoriesBody">
+                <!-- Loop -->
+
+                {% for key,p in products %}
+                    <tr>
+                        <td id="{{ p.id }}na">
+                          {{ p.name }}
+                        </td>
+                        <td id="{{ p.id }}price">
+                            {{ p.price }}
+                        </td>
+
+                        <td>
+                            {% block content %}
+                                <button onclick="addTocart({{ p.id }})"  class="btn btn-primary ">ADD</button>
+                            {% endblock %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                {% endif %}
+                <!-- End Loop -->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div>
+    <div class="row">
+    <div class="col">
+    <div class="card shadow">
+        <div class="card-header border-0">
+            <div class="row">
+
+
+
+                <div class="col-md-3">
+                    <h1 style="color: rebeccapurple">Cart</h1>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" id="categoriesTable">
+            <table class="table align-items-center table-flush tablesorter tablepager">
+                <thead class="thead-light">
+
+                <tr>
+                    <th scope="col">product Name</th>
+                     <th scope="col">Quantity</th>
+                    <th scope="col"> Price Unit</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Created At</th>
+                </tr>
+                </thead>
+                <tbody id="categoriesBody1">
+
+                <!-- Loop -->
+
+
+
+
+                <!-- End Loop -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}
+        {% block internalJs %}
+        <script >
+        function addTocart(id){
+
+            let products={}
+            let idd=id+'na'
+            console.log(idd)
+
+
+
+let name = document.getElementById(id+'na').innerHTML
+let price = document.getElementById(id+'price').innerHTML
+var tbody = document.getElementById("categoriesBody1");
+var tr_name = document.createElement("tr");
+
+var td_name = document.createElement("td");
+var td_quantity = document.createElement("td");
+var td_price = document.createElement("td");
+var td_total = document.createElement("td");
+td_total.setAttribute("id",id+"totalappend")
+td_price.setAttribute("id",id+"unitprice")
+td_name.setAttribute("id",id+"nameappend")
+
+var input = document.createElement("input");
+input.setAttribute("type", "number");
+input.setAttribute("id", id+"quantityappend");
+input.setAttribute("value", 1);
+var to = input.value * price
+td_quantity.appendChild(input)
+td_price.appendChild(document.createTextNode(price));
+td_name.appendChild(document.createTextNode(name));
+td_total.appendChild(document.createTextNode(price))
+
+
+tr_name.appendChild(td_name);
+tr_name.appendChild(td_quantity)
+tr_name.appendChild(td_price);
+tr_name.appendChild(td_total)
+tbody.appendChild(tr_name);
+let quantity = document.getElementById(id+"quantityappend").value
+
+         products={'id':id,
+                    'name':name,
+                    'price':price
+            }
+         console.log(quantity)
+        }
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+
+
+
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white">Categories </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h3 class="mb-0">Categories</h3>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control " placeholder="Search Table" id="contact-filter">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="categoriesTable">
+                        <table class="table align-items-center table-flush tablesorter tablepager">
+                            <thead class="thead-light">
+
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col" >Label</th>
+                                <th scope="col" >Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="categoriesBody">
+                            {% for category in categories %}
+                            <!-- Loop -->
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td >
+                                    {{ category.title }}
+                                </td>
+                                <td >
+                                    <a href="{{ path('categories_show', {'id': category.id}) }}"  class="badge badge-info">show</a>
+                                    <a href="{{ path('categories_edit', {'id': category.id}) }}"  class="badge badge-info">edit</a>
+                                    <a href="{{ path('categories_delete', {'id': category.id}) }}"  class="badge  btn-danger">delete</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            <!-- End Loop -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <span  class="btn-inner--icon"><a class="btn btn-icon btn-3 btn-primary" type="button" style="margin-top: 2em" href="{{ path('categories_new') }}"><i   class="ni ni-fat-add"></i>Add New Category</a></span>
+
+
+
+
+
+{% endblock %}

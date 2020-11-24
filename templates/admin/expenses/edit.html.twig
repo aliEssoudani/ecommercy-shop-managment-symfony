@@ -1,0 +1,27 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block body %}
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white">edit expenses</h1>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {{ form_start(form) }}
+            {{ form_widget(form.title,  {'attr': {'class' : "form-control", 'placeholder': 'Enter name of title'}}) }} <br>
+            {{ form_widget(form.description,  {'attr': {'class' : "form-control", 'type' : "number" , 'placeholder': 'description'}}) }}<br>
+            {{ form_widget(form.amount,  {'attr': {'class' : "form-control", 'placeholder': 'Enter amount'}}) }}<br>
+            {{ form_widget(form.stores,{'attr': {'class' : "form-control", 'placeholder': 'Enter store'}}) }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block"> Update</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

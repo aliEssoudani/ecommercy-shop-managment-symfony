@@ -1,0 +1,96 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white">Stores </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h3 class="mb-0">Stores</h3>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control " placeholder="Search Table" id="contact-filter">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="categoriesTable">
+                        <table class="table align-items-center table-flush tablesorter tablepager">
+                            <thead class="thead-light">
+
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">phone</th>
+                                <th scope="col">creation date</th>
+                                <th scope="col">isActive</th>
+                                <th scope="col">login</th>
+                                <th scope="col">password</th>
+                                <th scope="col">manager</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="categoriesBody">
+
+                            <!-- Loop -->
+                            {% for key,store in stores %}
+                                <tr>
+                                    <td>
+                                        {{ store.name }}
+                                    </td>
+                                    <td>
+                                        {{ store.phone }}
+                                    </td>
+                                    <td>
+                                        {{ store.creationDate | date }}
+                                    </td>
+                                    <td>
+                                        {{ store.isActive }}
+                                    </td>
+                                    <td>
+                                        {{ store.login }}
+                                    </td>
+                                    <td>
+                                        {{ store.password }}
+                                    </td>
+                                    <td>
+                                        {{ store.managers }}
+                                    </td>
+                                    <td >
+
+                                        <a href="{{ path('stores_edit', {'id': store.id}) }}"  class="badge badge-info">edit</a>
+                                        <a href="{{ path('stores_delete', {'id': store.id}) }}"  class="badge badge-danger">delete</a>
+
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            <!-- End Loop -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <span class="btn-inner--icon"><a class="btn btn-icon btn-3 btn-primary" type="button" style="margin-top: 2em"
+                                     href="{{ path('stores_new') }}"><i class="ni ni-fat-add"></i>Add New Store</a></span>
+
+{% endblock %}

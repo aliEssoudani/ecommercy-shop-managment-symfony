@@ -1,0 +1,86 @@
+{% extends 'baseStore.html.twig' %}
+
+{% block body %}
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+        <div class="container-fluid">
+            <div class="header-body" style="text-align: center">
+                <h1 style="color: white">Attendance</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--7">
+        <!-- Table -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h3 class="mb-0">Attendance</h3>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control " placeholder="Search Table" id="contact-filter">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="categoriesTable">
+                        <table class="table align-items-center table-flush tablesorter tablepager">
+                            <thead class="thead-light">
+
+                            <tr>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Check-in</th>
+                                <th scope="col">Check-out</th>
+                                <th scope="col">IsValid</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="categoriesBody">
+
+                            <!-- Loop -->
+                            {% for key,att in attendance %}
+                                <tr>
+                                    <td>
+                                        {{ att.employes }}
+                                    </td>
+                                    <td>
+                                        {{ att.checkIn | date  }}
+                                    </td>
+                                    <td>
+                                        {{ att.checkOut | date  }}
+                                    </td>
+                                    <td>
+                                        {{ att.isValide }}
+                                    </td>
+                                    <td >
+
+                                        ToDo...
+
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            <!-- End Loop -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <center> <select class="custom-select" style="width: 50%" id="inputGroupSelect01" name="employes" >
+
+        <option selected name="empId">Choose Employee</option>
+        {% for e in employes %}
+            <option value={{ e.id }} >{{ e.fullName }}</option>
+        {% endfor%}
+    </select></center>
+    <span  class="btn-inner--icon"><a class="btn btn-icon btn-3 btn-primary" type="button" style="margin-top: 2em" href="{{ path('attendance_new') }}"><i   class="ni ni-fat-add"></i>Add New Attendance</a></span>
+{% endblock %}
